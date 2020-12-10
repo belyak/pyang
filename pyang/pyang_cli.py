@@ -17,17 +17,18 @@ from pyang import statements
 from pyang import syntax
 
 
-def run(args=None):
+def run(args=None, extra_plugin_dirs=None):
     """
     The main CLI entrypoint
     :param args: explicitly passed arguments for using pyayng from python
+    :param extra_plugin_dirs: additional plugin dirs (from calling app)
     """
 
     usage = """%prog [options] [<filename>...]
 
 Validates the YANG module in <filename> (or stdin), and all its dependencies."""
 
-    plugindirs = []
+    plugindirs = extra_plugin_dirs or []
     # check for --plugindir
     idx = 1
     while '--plugindir' in sys.argv[idx:]:
